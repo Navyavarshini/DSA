@@ -1,21 +1,21 @@
 class Solution {
 public:
     bool isBalanced(TreeNode* root) {
-        return dfsHeight(root) != -1;
+        return height(root) != -1;
     }
 
 private:
-    int dfsHeight(TreeNode* node) {
-        if (!node) return 0;
-
-        int leftHeight = dfsHeight(node->left);
-        if (leftHeight == -1) return -1;
-
-        int rightHeight = dfsHeight(node->right);
-        if (rightHeight == -1) return -1;
-
+    int height(TreeNode* node) {
+        if (node == nullptr) return 0;  // Base case: empty tree has height 0
+        
+        // Recursively get the height of the left subtree
+        int leftHeight = height(node->left);
+        if (leftHeight == -1) return -1;  
+        int rightHeight = height(node->right);
+        if (rightHeight == -1) return -1;  
         if (abs(leftHeight - rightHeight) > 1) return -1;
-
-        return 1 + max(leftHeight, rightHeight);
+        
+        
+        return max(leftHeight, rightHeight) + 1;
     }
 };
